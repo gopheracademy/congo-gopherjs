@@ -59,7 +59,7 @@ func setup() {
 		c = c + "</div></div></div>"
 		c = c + "<div class='speaker-description col-md-9'>"
 		c = c + "<h2><a href='http://gophercon.com/speakers/tueda/'>" + *speak.FirstName + " " + *speak.LastName + "</a></h2>"
-		c = c + "<span class='sub'><a href='/sessions/tueda'>Go for Mobile Games</a></span>"
+		c = c + "<span class='sub'><a href='/sessions/tueda'>" + *speak.Bio + "</a></span>"
 		c = c + "</div> </div></div>"
 	}
 

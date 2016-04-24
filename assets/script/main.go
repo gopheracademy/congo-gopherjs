@@ -33,6 +33,13 @@ type Speaker struct {
 }
 
 func main() {
+
+	document.AddEventListener("DOMContentLoaded", false, func(_ dom.Event) {
+		go setup()
+	})
+}
+func setup() {
+
 	speakers, err := getSpeakers()
 	if err != nil {
 		fmt.Println(err)
@@ -42,12 +49,22 @@ func main() {
 	speaks := document.GetElementByID("speakers").(dom.HTMLElement)
 	var c string
 	for _, speak := range speakers {
-		c = c + fmt.Sprintf("<span>%s</span><br/>", *speak.Bio)
+
+		c = c + "<div class='row'>"
+		c = c + "<div class='speaker-with-bio'>"
+		c = c + " <div class='speaker col-md-3'>"
+		c = c + "<div class='image-holder'>"
+		c = c + "<img class='background-image' alt='Speaker' src='/assets/2016/img/speakers/takuya-ueda.png'>"
+		c = c + "<div class='hover-state text-center preserve3d'>"
+		c = c + "</div></div></div>"
+		c = c + "<div class='speaker-description col-md-9'>"
+		c = c + "<h2><a href='http://gophercon.com/speakers/tueda/'>" + *speak.FirstName + " " + *speak.LastName + "</a></h2>"
+		c = c + "<span class='sub'><a href='/sessions/tueda'>Go for Mobile Games</a></span>"
+		c = c + "</div> </div></div>"
 	}
 
 	speaks.SetInnerHTML(c)
 }
-
 func getSpeakers() ([]Speaker, error) {
 	resp, err := http.Get("http://arrakis:18080/api/tenants/1/events/1/speakers")
 	if err != nil {

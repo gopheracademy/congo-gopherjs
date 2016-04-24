@@ -28,13 +28,7 @@ func mainHandler(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	var data = struct {
-		Animals string
-	}{
-		Animals: "gophers",
-	}
-
-	err = t.ExecuteTemplate(w, "index.html.tmpl", data)
+	err = t.ExecuteTemplate(w, "index.html.tmpl", nil)
 	if err != nil {
 		log.Println("t.Execute:", err)
 		http.Error(w, err.Error(), http.StatusInternalServerError)
